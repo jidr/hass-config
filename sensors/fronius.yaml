@@ -1,0 +1,15 @@
+  - platform: rest
+    resource: http://10.0.1.211/solar_api/v1/GetPowerFlowRealtimeData.fcgi
+    name: Solel just nu
+    value_template: '{{ value_json["Body"]["Data"]["Site"]["P_PV"] }}'
+    unit_of_measurement: W
+  - platform: rest
+    resource: http://10.0.1.211/solar_api/v1/GetPowerFlowRealtimeData.fcgi
+    name: Solel genererad idag
+    value_template: '{{ value_json["Body"]["Data"]["Site"]["E_Day"] | multiply(0.001) }}'
+    unit_of_measurement: kWh
+  - platform: rest
+    resource: http://10.0.1.211/solar_api/v1/GetPowerFlowRealtimeData.fcgi
+    name: Solel genererad i år
+    value_template: '{{ value_json["Body"]["Data"]["Site"]["E_Year"] | multiply(0.001) }}'
+    unit_of_measurement: kWh

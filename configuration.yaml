@@ -1,14 +1,11 @@
 homeassistant:
-  # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
   latitude: !secret lat
   longitude: !secret long
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 23
-  # metric for Metric, imperial for Imperial
   unit_system: metric
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Stockholm
   customize:
     sensor.solel_just_nu:
@@ -21,36 +18,24 @@ homeassistant:
       homebridge_visible: true
     input_boolean.appletv_playing:
       homebridge_visible: true
-    
-    
 
-# Show links to resources in log and frontend
-introduction:
-
-# Enables the frontend
+# Enables a bunch of components with autoconfig
 frontend:
+introduction:
+updater:
+discovery:
+history:
+sun:
+ios:
 
 http:
-  # Uncomment this to add a password (recommended!)
   api_password: !secret http_password
-
-# Checks for available updates
-updater:
-
-# Discover some devices automatically
-discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 #conversation:
 
-# Enables support for tracking state changes over time.
-history:
-
 # View all events in a logbook
 #logbook:
-
-# Track the sun
-sun:
 
 # Text to speech
 #tts:
@@ -64,65 +49,6 @@ media_player:
   - platform: sonos
   - platform: plex
 
-input_boolean:
-  doorbell:
-    name: Someone is at the door
-    icon: mdi:account-alert
-    initial: off
-  appletv_playing:
-    name: Playing a video
-    icon: mdi:airplay
-
-automation:
-  - alias: "Someone is at the door"
-    trigger:
-      platform: state
-      entity_id: input_boolean.doorbell
-      to: 'on'
-    action:
-      - service: media_player.sonos_snapshot
-        data:
-          entity_id: media_player.tvrum
-      - service: media_player.media_stop
-        data:
-          entity_id: media_player.tvrum
-      - service: media_player.volume_set
-        data:
-          entity_id: media_player.tvrum
-          volume_level: 0.57
-      - service: media_player.play_media
-        data:
-          entity_id: media_player.tvrum
-          media_content_id: http://10.0.1.210/Doorbell-ringtone.mp3
-          media_content_type: music
-      - delay: 0:00:05
-      - service: media_player.sonos_restore
-        data:
-          entity_id: media_player.tvrum
-      - service: input_boolean.turn_off
-        data:
-          entity_id: input_boolean.doorbell
-
-  - alias: "ATV play"
-    trigger:
-      platform: state
-      entity_id: media_player.vardagsrum
-      to: 'playing'
-    action:
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.appletv_playing
-
-  - alias: "ATV !play"
-    trigger:
-      platform: state
-      entity_id: media_player.vardagsrum
-      from: 'playing'
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: input_boolean.appletv_playing
-
 recorder:
   purge_interval: 1
   purge_keep_days: 14
@@ -132,23 +58,6 @@ influxdb:
   username: home-assistant
   password: !secret influx_password
 
-sensor:
-  - platform: rest
-    resource: http://10.0.1.211/solar_api/v1/GetPowerFlowRealtimeData.fcgi
-    name: Solel just nu
-    value_template: '{{ value_json["Body"]["Data"]["Site"]["P_PV"] }}'
-    unit_of_measurement: W
-  - platform: rest
-    resource: http://10.0.1.211/solar_api/v1/GetPowerFlowRealtimeData.fcgi
-    name: Solel genererad idag
-    value_template: '{{ value_json["Body"]["Data"]["Site"]["E_Day"] | multiply(0.001) }}'
-    unit_of_measurement: kWh
-  - platform: rest
-    resource: http://10.0.1.211/solar_api/v1/GetPowerFlowRealtimeData.fcgi
-    name: Solel genererad i år
-    value_template: '{{ value_json["Body"]["Data"]["Site"]["E_Year"] | multiply(0.001) }}'
-    unit_of_measurement: kWh 
-  - platform: yr
-
-ios:
-
+input_boolean: !include input_boolean.yaml
+automation: !include_dir_merge_list automation
+sensor: !include_dir_merge_list sensors

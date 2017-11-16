@@ -1,0 +1,28 @@
+  - alias: "Someone is at the door"
+    trigger:
+      platform: state
+      entity_id: input_boolean.doorbell
+      to: 'on'
+    action:
+      - service: media_player.sonos_snapshot
+        data:
+          entity_id: media_player.tvrum
+      - service: media_player.media_stop
+        data:
+          entity_id: media_player.tvrum
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.tvrum
+          volume_level: 0.57
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.tvrum
+          media_content_id: http://10.0.1.210/Doorbell-ringtone.mp3
+          media_content_type: music
+      - delay: 0:00:05
+      - service: media_player.sonos_restore
+        data:
+          entity_id: media_player.tvrum
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.doorbell
