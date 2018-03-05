@@ -1,0 +1,5 @@
+  - platform:file
+    file_path:/home/homeassistant/sparsnas_decoder/sparsnas.log
+    name: Power draw
+    unit_of_measurement: W
+    value_template: '{{ value_json.watt }}'
