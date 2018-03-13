@@ -46,6 +46,8 @@ http:
 
 mqtt:
   broker: 10.0.1.210
+  username: pi
+  password: !secret mqtt_password
 
 media_player:
   - platform: sonos
