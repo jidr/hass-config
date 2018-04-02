@@ -50,19 +50,16 @@ homeassistant:
     sensor.solel_genererad_i_ar:
       group:
         group.sparsnas:
-          friendly_name: Ths year
+          friendly_name: This year
     input_boolean.doorbell:
       homebridge_visible: true
     media_player.tvrum:
       homebridge_visible: true
     input_boolean.appletv_playing:
       homebridge_visible: true
-    input_boolean.doorbell:
-      homebridge_visible: true
 
 # Enables a bunch of components with autoconfig
 frontend:
-introduction:
 updater:
 discovery:
 history:
