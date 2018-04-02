@@ -1,6 +1,6 @@
   - platform: mqtt
     state_topic: !secret sparsnas_sensor
-    name: "Energy consumption momentary"
+    name: "Power draw"
     unit_of_measurement: "W"
     value_template: '{{ value_json.Watt | round(1) }}'
     icon: mdi:flash-circle
