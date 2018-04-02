@@ -8,6 +8,36 @@ homeassistant:
   unit_system: metric
   time_zone: Europe/Stockholm
   customize:
+    sensor.sparsnas_battery_remaining:
+      hidden: true
+      icon: mdi:battery-outline
+    sensor.sparsnas_frequency_error:
+      hidden: true
+      icon: mdi:signal
+    sensor.kwh_today:
+      group:
+        group.sparsnas:
+          friendly_name: Today
+      icon: mdi:flash-circle
+    sensor.kwh_current_month:
+      group:
+        group.sparsnas:
+          friendly_name: This Month
+      icon: mdi:flash-circle
+    sensor.sparsnas_template_kwh_sensor_day:
+      hidden: true
+    sensor.sparsnas_template_kwh_sensor_month:
+      hidden: true
+    sensor.sparsnas_energy_consumption_over_time:
+      hidden: true
+      icon: mdi:flash-circle
+    sensor.sparsnas_energy_consumption_momentary:
+      extra_data_template: '${"Battery: " + entities[''sensor.sparsnas_battery_remaining''].state
+        + "%, Signal: " + entities[''sensor.sparsnas_frequency_error''].state}'
+      group:
+        group.sparsnas:
+          friendly_name: Power usage
+      icon: mdi:flash-circle
     sensor.solel_just_nu:
       homebridge_sensor_type: light
       homebridge_name: Solar power
@@ -61,6 +91,19 @@ influxdb:
   host: 10.0.1.3
   username: home-assistant
   password: !secret influx_password
+
+group:
+  sparsnas:
+    name: Energy Consumption
+    view: no
+    icon: mdi:flash-circle
+    entities:
+      - sensor.sparsnas_energy_consumption_momentary
+      - sensor.sparsnas_energy_consumption_over_time
+      - sensor.sparsnas_battery_remaining
+      - sensor.sparsnas_frequency_error
+      - sensor.kwh_today
+      - sensor.kwh_current_month
 
 input_boolean: !include input_boolean.yaml
 automation: !include_dir_merge_list automation
