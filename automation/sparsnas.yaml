@@ -4,7 +4,7 @@
       retain: 'true'
       topic: template/kwh/month
     service: mqtt.publish
-  alias: Sparsnäs monthly consumption
+  alias: Monthly consumption
   trigger:
     platform: time
     at: '00:00:01'
@@ -47,7 +47,7 @@
       retain: 'true'
       topic: template/kwh/day
     service: mqtt.publish
-  alias: Sparsnäs daily consumption
+  alias: Today
   condition: []
   id: '1516806539856'
   trigger:

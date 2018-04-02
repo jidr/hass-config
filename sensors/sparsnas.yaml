@@ -1,12 +1,12 @@
   - platform: mqtt
     state_topic: !secret sparsnas_sensor
-    name: "Sparsnäs energy consumption momentary"
+    name: "Energy consumption momentary"
     unit_of_measurement: "W"
     value_template: '{{ value_json.Watt | round(1) }}'
     icon: mdi:flash-circle
   - platform: mqtt
     state_topic: !secret sparsnas_sensor
-    name: "Sparsnäs energy consumption over time"
+    name: "Energy consumption over time"
     unit_of_measurement: "kWh"
     value_template: '{{ value_json.kWh | round(1) }}'
     hidden: true
@@ -38,12 +38,12 @@
   - platform: template
     sensors:
       kwh_current_month:
-        friendly_name: "Sparsnäs current month"
+        friendly_name: "Current month"
         unit_of_measurement: "kWh"
         value_template: >-
           {{ (float(states.sensor.sparsnas_energy_consumption_over_time.state) - float(states.sensor.sparsnas_template_kwh_sensor_month.state)) | round(1) }}
       kwh_today:
-        friendly_name: "Sparsnäs current day"
+        friendly_name: "Today"
         unit_of_measurement: "kWh"
         value_template: >-
           {{ (float(states.sensor.sparsnas_energy_consumption_over_time.state) - float(states.sensor.sparsnas_template_kwh_sensor_day.state)) | round(1) }}
