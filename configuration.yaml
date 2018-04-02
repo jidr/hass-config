@@ -32,8 +32,6 @@ homeassistant:
       hidden: true
       icon: mdi:flash-circle
     sensor.sparsnas_energy_consumption_momentary:
-      extra_data_template: '${"Battery: " + entities[''sensor.sparsnas_battery_remaining''].state
-        + "%, Signal: " + entities[''sensor.sparsnas_frequency_error''].state}'
       group:
         group.sparsnas:
           friendly_name: Power usage
@@ -45,6 +43,14 @@ homeassistant:
       group:
         group.sparsnas:
           friendly_name: Production
+    sensor.solel_genererad_idag:
+      group:
+        group.sparsnas:
+          friendly_name: Today
+    sensor.solel_genererad_i_ar:
+      group:
+        group.sparsnas:
+          friendly_name: Ths year
     input_boolean.doorbell:
       homebridge_visible: true
     media_player.tvrum:
@@ -102,12 +108,11 @@ group:
     icon: mdi:flash-circle
     entities:
       - sensor.sparsnas_energy_consumption_momentary
-      - sensor.sparsnas_energy_consumption_over_time
-      - sensor.sparsnas_battery_remaining
-      - sensor.sparsnas_frequency_error
       - sensor.kwh_today
       - sensor.kwh_current_month
       - sensor.solel_just_nu
+      - sensor.solel_genererad_idag
+      - sensor.solel_genererad_i_ar
 
 input_boolean: !include input_boolean.yaml
 automation: !include_dir_merge_list automation
