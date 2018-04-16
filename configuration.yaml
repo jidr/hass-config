@@ -28,7 +28,7 @@ homeassistant:
       hidden: true
     sensor.sparsnas_template_kwh_sensor_month:
       hidden: true
-    sensor.sparsnas_energy_consumption_over_time:
+    sensor.energy_consumption_over_time:
       hidden: true
       icon: mdi:flash-circle
     sensor.power_draw:
@@ -100,7 +100,7 @@ influxdb:
 
 group:
   sparsnas:
-    name: Energy Consumption
+    name: Energy States
     view: no
     icon: mdi:flash-circle
     entities:
