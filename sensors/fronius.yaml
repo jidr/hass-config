@@ -13,3 +13,7 @@
     name: Solel genererad i år
     value_template: '{{ value_json["Body"]["Data"]["Site"]["E_Year"] | multiply(0.001) }}'
     unit_of_measurement: kWh
+  - platform: fronius
+    resource: http://10.0.1.211
+    monitored_conditions:
+    - sensor_type: inverter

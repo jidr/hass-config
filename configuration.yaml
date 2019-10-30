@@ -4,7 +4,7 @@ homeassistant:
   latitude: !secret lat
   longitude: !secret long
   # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: 23
+  elevation: 28
   unit_system: metric
   time_zone: Europe/Stockholm
   customize:
@@ -37,9 +37,6 @@ homeassistant:
           friendly_name: Power usage
       icon: mdi:flash-circle
     sensor.solel_just_nu:
-      homebridge_sensor_type: light
-      homebridge_name: Solar power
-      homebridge_visible: true
       group:
         group.sparsnas:
           friendly_name: Production
@@ -51,20 +48,17 @@ homeassistant:
       group:
         group.sparsnas:
           friendly_name: This year
-    input_boolean.doorbell:
-      homebridge_visible: true
-    media_player.tvrum:
-      homebridge_visible: true
-    input_boolean.appletv_playing:
-      homebridge_visible: true
 
 # Enables a bunch of components with autoconfig
+config:
 frontend:
 updater:
 discovery:
 history:
 sun:
 ios:
+homekit:
+system_health:
 
 http:
   api_password: !secret http_password
@@ -82,12 +76,11 @@ http:
 
 mqtt:
   broker: 10.0.1.210
-  username: pi
-  password: !secret mqtt_password
 
 media_player:
-  - platform: sonos
   - platform: plex
+
+sonos:
 
 recorder:
   purge_interval: 1
