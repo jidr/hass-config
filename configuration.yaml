@@ -49,6 +49,8 @@ homeassistant:
         group.sparsnas:
           friendly_name: This year
 
+tibber:
+  access_token: !secret tibber-token
 # Enables a bunch of components with autoconfig
 config:
 frontend:
@@ -59,9 +61,10 @@ sun:
 ios:
 homekit:
 system_health:
+mobile_app:
 
-http:
-  api_password: !secret http_password
+#http:
+#  api_password: !secret http_password
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 #conversation:
