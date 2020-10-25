@@ -8,6 +8,12 @@
     name: "Rad Forward"
     unit_of_measurement: "c"
     icon: mdi:thermometer
+  - platform: template                
+    sensors:           
+      rad_forward_fixed:
+        entity_id: sensor.rad_forward
+        friendly_name: "Rad Forward"              
+        value_template: "{{ states('sensor.rad_forward') | abs }}"
   - platform: mqtt
     state_topic: "fcf5c492273d/HP/0003"
     name: "Heat Carrier Return"
@@ -43,6 +49,12 @@
     name: "Warm water"
     unit_of_measurement: "c"
     icon: mdi:thermometer
+  - platform: template                
+    sensors:           
+      warm_water_fixed:
+        entity_id: sensor.warm_water
+        friendly_name: "Rad Forward"              
+        value_template: "{{ states('sensor.warm_water') | abs }}"
   - platform: mqtt
     state_topic: "fcf5c492273d/HP/000A"
     name: "Warm water 2"
