@@ -12,7 +12,7 @@
     sensors:           
       rad_forward_abs:
         friendly_name: "Rad Forward"              
-        icon: mdi:thermometer
+        icon_template: mdi:thermometer
         unit_of_measurement: "c"
         device_class: mqtt
         value_template: "{{ states('sensor.rad_forward') | abs }}"
