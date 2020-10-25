@@ -10,7 +10,7 @@
     icon: mdi:thermometer
   - platform: template                
     sensors:           
-      rad_forward_fixed:
+      rad_forward:
         friendly_name: "Rad Forward"              
         icon_template: mdi:thermometer
         unit_of_measurement: "c"
@@ -52,7 +52,7 @@
     icon: mdi:thermometer
   - platform: template                
     sensors:           
-      warm_water_fixed:
+      warm_water:
         friendly_name: "Warm water"
         icon_template: mdi:thermometer
         unit_of_measurement: "c"
