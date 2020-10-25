@@ -1,0 +1,30 @@
+  - platform: mqtt
+    state_topic: "fcf5c492273d/HP/1A01"
+    name: "Compressor"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    state_topic: "fcf5c492273d/HP/1A07"
+    name: "Switch valve"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    state_topic: "fcf5c492273d/HP/1A04"
+    name: "Brine pump"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    state_topic: "fcf5c492273d/HP/1A06"
+    name: "Radiator pump"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    state_topic: "fcf5c492273d/HP/1A05"
+    name: "Heat carrier pump"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    state_topic: "fcf5c492273d/HP/1A20"
+    name: "Alarm"
+    payload_on: "1"
+    payload_off: "0"

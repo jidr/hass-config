@@ -97,7 +97,6 @@ influxdb:
 group:
   sparsnas:
     name: Energy States
-    view: no
     icon: mdi:flash-circle
     entities:
       - sensor.power_draw
@@ -110,3 +109,5 @@ group:
 input_boolean: !include input_boolean.yaml
 automation: !include_dir_merge_list automation
 sensor: !include_dir_merge_list sensors
+binary_sensor: !include_dir_merge_list binary_sensors
+climate: !include_dir_merge_list climate
