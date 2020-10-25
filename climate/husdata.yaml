@@ -12,18 +12,25 @@
     min_temp: 0
     max_temp: 10
     temp_step: .1
-    name: "Curve Influence setting"
+    name: "Room Curve Influence setting"
   - platform: mqtt
-    temperature_state_topic: "fcf5c492273d/HP/0205"
-    temperature_command_topic: "fcf5c492273d/HP/SET/0205"
+    temperature_state_topic: "fcf5c492273d/HP/2205"
+    temperature_command_topic: "fcf5c492273d/HP/SET/2205"
+    min_temp: 0
+    max_temp: 10
+    temp_step: .1
+    name: "Heat set 1 curve"
+  - platform: mqtt
+    temperature_state_topic: "fcf5c492273d/HP/0208"
+    temperature_command_topic: "fcf5c492273d/HP/SET/0208"
     min_temp: 20
     max_temp: 50
     temp_step: .1
-    name: "Curve Left setting"
+    name: "Hot water temp setting"
   - platform: mqtt
-    temperature_state_topic: "fcf5c492273d/HP/0206"
-    temperature_command_topic: "fcf5c492273d/HP/SET/0206"
-    min_temp: 20
-    max_temp: 50
-    temp_step: .1
-    name: "Curve Right setting"
+    temperature_state_topic: "fcf5c492273d/HP/7209"
+    temperature_command_topic: "fcf5c492273d/HP/SET/7209"
+    min_temp: 00
+    max_temp: 60
+    temp_step: 1
+    name: "Extra warm water"
