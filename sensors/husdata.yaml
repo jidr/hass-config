@@ -44,6 +44,11 @@
     unit_of_measurement: "c"
     icon: mdi:thermometer
   - platform: mqtt
+    state_topic: "fcf5c492273d/HP/000A"
+    name: "Warm water 2"
+    unit_of_measurement: "c"
+    icon: mdi:thermometer
+  - platform: mqtt
     state_topic: "fcf5c492273d/HP/000B"
     name: "Hot gas"
     unit_of_measurement: "c"
