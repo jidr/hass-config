@@ -86,8 +86,8 @@ media_player:
 sonos:
 
 recorder:
-  purge_interval: 1
-  purge_keep_days: 14
+  commit_interval: 1
+  purge_keep_days: 7
 
 influxdb:
   host: 10.0.1.3
