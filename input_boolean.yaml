@@ -1,7 +1,0 @@
-  doorbell:
-    name: Someone is at the door
-    icon: mdi:account-alert
-    initial: off
-  appletv_playing:
-    name: Playing a video
-    icon: mdi:airplay

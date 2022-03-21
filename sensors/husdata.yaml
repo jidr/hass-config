@@ -72,3 +72,14 @@
     name: "Additional electric heater"
     unit_of_measurement: "%"
     icon: mdi:flash
+  - platform: mqtt
+    state_topic: "fcf5c492273d/HP/STATUS/POWERSUM"
+    name: "Power usage"
+    unit_of_measurement: "W"
+    icon: mdi:flash
+  - platform: integration
+    source: sensor.power_usage
+    name: heat_pump_kwh
+    unit_prefix: k
+    round: 2
+    method: left

@@ -1,6 +1,5 @@
   - platform: mitemp_bt
     mac: '4C:65:A8:D9:A7:47'
-    #mac: '3F:59:C8:72:6C:6D'
     name: Badrum nere
 #  - platform: mitemp_bt
 #    mac: 'xx:xx:xx:xx:xx:xx'
