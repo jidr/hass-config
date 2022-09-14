@@ -1,6 +1,0 @@
-  - platform: mitemp_bt
-    mac: '4C:65:A8:D9:A7:47'
-    name: Badrum nere
-#  - platform: mitemp_bt
-#    mac: 'xx:xx:xx:xx:xx:xx'
-#    name: Sovrummet

@@ -1,0 +1,5 @@
+    - name: "Power usage"
+      state_topic: "fcf5c492273d/HP/STATUS/POWERSUM"
+      icon: mdi:flash
+      unit_of_measurement: "W"
+      state_class: measurement

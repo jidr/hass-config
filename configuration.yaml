@@ -38,7 +38,7 @@ system_health:
 default_config:
 
 mqtt:
-  broker: 10.0.1.210
+  sensor: !include_dir_merge_list mqtt
 
 sonos:
 
@@ -52,11 +52,35 @@ influxdb:
   password: !secret influx_password
 
 #input_boolean: !include input_boolean.yaml
-automation: !include_dir_merge_list automation
+automation: !include automations.yaml
 sensor: !include_dir_merge_list sensors
 binary_sensor: !include_dir_merge_list binary_sensors
+plant: 
+  tomatoes:
+    sensors:
+      moisture: sensor.miflora_tomatoes_moisture
+      temperature: sensor.miflora_tomatoes_temperature
+      conductivity: sensor.miflora_tomatoes_conductivity
+      brightness: sensor.miflora_tomatoes_light
+    min_moisture: 20
+    max_moisture: 60
+    min_battery: 17
+    min_conductivity: 500
+    min_temperature: 15
+  carrots:
+    sensors:
+      moisture: sensor.miflora_carrots_moisture
+      temperature: sensor.miflora_carrots_temperature
+      conductivity: sensor.miflora_carrots_conductivity
+      brightness: sensor.miflora_carrots_light
+    min_moisture: 20
+    max_moisture: 60
+    min_battery: 17
+    min_conductivity: 500
+    min_temperature: 15
 climate: !include_dir_merge_list climate
-#utility_meter:
-#  energy:
-#    source: sensor.heat_pump_kwh
-#    cycle: hourly
+utility_meter:
+  energy:
+    source: sensor.heat_pump_kwh
+    cycle: hourly
+    name: heat_pump_kwh_hourly
