@@ -84,3 +84,72 @@ utility_meter:
     source: sensor.heat_pump_kwh
     cycle: hourly
     name: heat_pump_kwh_hourly
+
+# From https://community.home-assistant.io/t/tibber-price-level-to-turn-on-heating/404341, will be used to automate heating
+template:
+  - sensor:
+      - name: Electricity Price Level (24h)
+        unit_of_measurement: ""
+        icon: mdi:currency-usd
+        state: >-
+          {% set price_cur = states('sensor.electricity_price_vinstavagen_30') | float(0) %}
+          {% set price_avg = state_attr('sensor.electricity_price_vinstavagen_30', 'avg_price') | float(0) %}
+          {% if price_cur == 0 or price_avg == 0 %}
+            -1
+          {% else %}
+            {% set price_ratio = (price_cur / price_avg) %}
+            {% if price_ratio >= 1.4 %}
+              5
+            {% elif price_ratio >= 1.15 %}
+              4
+            {% elif price_ratio <= 0.6 %}
+              1
+            {% elif price_ratio <= 0.9 %}
+              2
+            {% else %}
+              3
+            {% endif %}
+          {% endif %}
+      - name: Electricity Price Level (Tibber 3-days)
+        unit_of_measurement: ""
+        icon: mdi:currency-usd
+        state: >-
+          {% set enum_lvl = state_attr('sensor.electricity_price_vinstavagen_30', 'price_level') %}
+          {% if enum_lvl == "VERY_CHEAP" %}
+            1
+          {% elif enum_lvl == "CHEAP" %}
+            2
+          {% elif enum_lvl == "NORMAL" %}
+            3
+          {% elif enum_lvl == "EXPENSIVE" %}
+            4
+          {% else %} # enum_lvl == "VERY_EXPENSIVE"
+            5
+          {% endif %}
+      - name: Electricity Price Level (combined)
+        unit_of_measurement: ""
+        icon: mdi:currency-usd
+        state: >-
+          {% set level1 = states('sensor.electricity_price_level_24h') %}
+          {% set level3 = states('sensor.electricity_price_level_tibber_3_days') %}
+          {% if level1 == level3 %}
+            {{ level1 }}
+          {% elif level1 in ['unknown','undefined','none'] or level3 in ['unknown','undefined','none'] %}
+            -1
+          {% elif level1 == "1" %}
+            {{ level3 }}
+          {% elif level3 == "1" %}
+            {{ level1 }}
+          {% elif level1 == "2" %}
+            {{ level3 }}
+          {% elif level3 == "2" %}
+            {{ level1 }}
+          {% elif level1 == "3" %}
+            {{ level3 }}
+          {% elif level3 == "3" %}
+            {{ level1 }}
+          {% elif level1 == "4" %}
+            {{ level3 }}
+          {% else %}
+            {{ level1 }}
+          {% endif %}
