@@ -58,10 +58,10 @@ binary_sensor: !include_dir_merge_list binary_sensors
 plant: 
   tomatoes:
     sensors:
-      moisture: sensor.miflora_tomatoes_moisture
-      temperature: sensor.miflora_tomatoes_temperature
-      conductivity: sensor.miflora_tomatoes_conductivity
-      brightness: sensor.miflora_tomatoes_light
+      moisture: sensor.plant_sensor_1a23_moisture
+      temperature: sensor.plant_sensor_1a23_temperature
+      conductivity: sensor.plant_sensor_1a23_conductivity
+      brightness: sensor.plant_sensor_1a23_illuminance
     min_moisture: 20
     max_moisture: 60
     min_battery: 17
@@ -69,10 +69,10 @@ plant:
     min_temperature: 15
   carrots:
     sensors:
-      moisture: sensor.miflora_carrots_moisture
-      temperature: sensor.miflora_carrots_temperature
-      conductivity: sensor.miflora_carrots_conductivity
-      brightness: sensor.miflora_carrots_light
+      moisture: sensor.plant_sensor_02bf_moisture
+      temperature: sensor.plant_sensor_02bf_temperature
+      conductivity: sensor.plant_sensor_02bf_conductivity
+      brightness: sensor.plant_sensor_02bf_illuminance
     min_moisture: 20
     max_moisture: 60
     min_battery: 17
@@ -84,6 +84,12 @@ utility_meter:
     source: sensor.heat_pump_kwh
     cycle: hourly
     name: heat_pump_kwh_hourly
+
+cloud:
+  google_actions:
+    filter:
+      exclude_domains:
+        - media
 
 # From https://community.home-assistant.io/t/tibber-price-level-to-turn-on-heating/404341, will be used to automate heating
 template:
@@ -123,7 +129,7 @@ template:
             3
           {% elif enum_lvl == "EXPENSIVE" %}
             4
-          {% else %} # enum_lvl == "VERY_EXPENSIVE"
+          {% else %} 
             5
           {% endif %}
       - name: Electricity Price Level (combined)
